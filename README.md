@@ -12,8 +12,6 @@
 
 This project is an exercise in developing and deploying a Sentiment Analysis back-end. It was created as part of the Cloud Computing course at Lapland University of Applied Sciences. The project is built using Python 3.9 to ensure compatibility with CSC OpenShift, which is used for deployment.
 
-NOTE:
-
 ### Data
 
 The model is trained using a CSV dataset (train.csv) that contains labeled text data. The dataset consists of text samples labeled with sentiments (positive, negative, neutral). The dataset used in this project is based on the [Sentiment Analysis Dataset](https://www.kaggle.com/datasets/abhi8923shriv/sentiment-analysis-dataset) from Kaggle, which is a collection of tweets and their sentiment labels. You can find more details and download the dataset from the provided link.
