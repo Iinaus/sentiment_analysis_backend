@@ -26,7 +26,7 @@ The model is trained using a CSV dataset (train.csv) that contains labeled text 
 
 ### Frontend
 
-The frontend project was also developed as part of the Cloud Computing course at Lapland University of Applied Sciences. The project utilizes Vite as the build tool and is deployed on Render.com for hosting. You can find it running live on https://sentiment-analysis-frontend-o7e4.onrender.com/. You can find more details about the frontend project here: [https://github.com/Iinaus/sentiment_analysis_backend](https://github.com/Iinaus/sentiment_analysis_frontend).
+The frontend project was also developed as part of the Cloud Computing course at Lapland University of Applied Sciences. The project utilizes Vite as the build tool and is deployed on Render.com for hosting. You can find it running live on https://sentiment-analysis-frontend-o7e4.onrender.com/. You can find more details about the frontend project here: [https://github.com/Iinaus/sentiment_analysis_frontend](https://github.com/Iinaus/sentiment_analysis_frontend).
 
 ## Getting started
 
