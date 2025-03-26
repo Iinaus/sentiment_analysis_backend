@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from joblib import dump, load
 from sklearn.model_selection import train_test_split
@@ -6,18 +7,19 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 
 def train_model():
+    model_path = os.path.join('models', 'sentiment_model.joblib')
 
     # Check if the model is already cached
     try:
         # Attempt to load the model from the file
-        model = load('sentiment_model.joblib')
+        model = load(model_path)
         print("Loaded cached model.")
 
     except FileNotFoundError:   
         print("Training new model...")
 
         # Load the training data from a CSV file
-        df = pd.read_csv('train.csv', encoding='latin1')
+        df = pd.read_csv('data/train.csv', encoding='latin1')
 
         # Remove missing values in the dataset
         df.dropna(inplace=True)
@@ -39,7 +41,7 @@ def train_model():
         text_clf.fit(x_train, y_train)
 
         # Save the trained model for later use
-        dump(text_clf, 'sentiment_model.joblib')
+        dump(text_clf, model_path)
 
         model = text_clf
 
