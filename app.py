@@ -15,6 +15,27 @@ JWT_SECRET = Config.JWT_SECRET
 USERNAME = Config.USERNAME
 PASSWORD_HASH = Config.PASSWORD_HASH
 
+def authorize(func):
+    def wrapper(*args, **kwargs):
+        token = request.headers.get("Authorization")
+
+        if not token:
+            return jsonify({"error": "Token is missing!"}), 403
+        
+        try:
+            token = token.split(" ")[1]
+            data = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+        
+        except jwt.ExpiredSignatureError:
+            return jsonify({"error": "Token has expired!"}), 403
+
+        except Exception as e:
+            return jsonify({"error": "Invalid token!"}), 403
+        
+        return func(*args, **kwargs)
+    return wrapper
+
+
 @app.route('/')
 def hello_world():
     return "<p> Hello World! Webhook test</p>"
@@ -32,6 +53,7 @@ def login():
     return jsonify({"error": "Invalid credentials"}), 401
 
 @app.route('/evaluate', methods=['POST'])
+@authorize
 def evaluate():
     try:
         model = train_model()
