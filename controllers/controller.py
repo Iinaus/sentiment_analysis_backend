@@ -5,6 +5,7 @@ import jwt
 
 from config import Config
 from decorators.authorize import authorize
+from services.auth_service import create_token
 from services.model_training import train_model
 
 
@@ -12,10 +13,7 @@ def login():
     auth = request.json
     if auth and auth.get("username") == Config.USERNAME:
         if bcrypt.checkpw(auth.get("password").encode('utf-8'), Config.PASSWORD_HASH.encode('utf-8')):
-            token = jwt.encode(
-                {'user': auth["username"], 'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)},
-                Config.JWT_SECRET, algorithm="HS256"
-            )
+            token = token = create_token(auth.get("username"), auth.get("password"))
             return jsonify({"token": token})
     return jsonify({"error": "Invalid credentials"}), 401
 
