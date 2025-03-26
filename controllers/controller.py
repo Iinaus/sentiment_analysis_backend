@@ -1,12 +1,10 @@
-import datetime
 import bcrypt
 from flask import jsonify, request
-import jwt
 
 from config import Config
 from decorators.authorize import authorize
 from services.auth_service import create_token
-from services.model_training import train_model
+from services.model_training import get_model
 
 
 def login():
@@ -20,7 +18,7 @@ def login():
 @authorize
 def evaluate():
     try:
-        model = train_model()
+        model = get_model()
         data = request.json
 
         if "sentence" not in data:

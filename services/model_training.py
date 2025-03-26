@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 
-def train_model():
+def get_model():
     model_path = os.path.join('models', 'sentiment_model.joblib')
 
     # Check if the model is already cached
