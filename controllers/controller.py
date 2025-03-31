@@ -9,11 +9,17 @@ from services.model_training import get_model
 
 def login():
     auth = request.json
-    if auth and auth.get("username") == Config.USERNAME:
-        if bcrypt.checkpw(auth.get("password").encode('utf-8'), Config.PASSWORD_HASH.encode('utf-8')):
-            token = token = create_token(auth.get("username"), auth.get("password"))
-            return jsonify({"token": token})
-    return jsonify({"error": "Invalid credentials"}), 401
+    if not auth or "username" not in auth or "password" not in auth:
+        return jsonify({"error": "Missing credentials"}), 400
+
+    username = auth["username"]
+    password = auth["password"].encode('utf-8')
+
+    if username != Config.USERNAME or not bcrypt.checkpw(password, Config.PASSWORD_HASH.encode('utf-8')):
+        return jsonify({"error": "Invalid credentials"}), 401
+
+    token = create_token(username)
+    return jsonify({"token": token})
 
 @authorize
 def evaluate():

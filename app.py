@@ -5,7 +5,7 @@ from controllers import controller
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://sentiment-analysis-frontend-o7e4.onrender.com"}})
 
 app.add_url_rule('/login', endpoint='login', view_func=controller.login, methods=['POST'])
 app.add_url_rule('/evaluate', endpoint='evaluate', view_func=controller.evaluate, methods=['POST'])      
